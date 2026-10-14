@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#faf9f6" name="theme-color"/>
+<meta content="An interactive field guide to weak authentication. Explore four attack patterns, then see what stronger identity checks change." name="description"/>
+<title>Weak Authentication — Interactive Field Notes</title>
+
+<link href="./assets/styles.css?v=20261014-r3" rel="stylesheet"/>
+<script src="./assets/js/app.js?v=20261014-r3" type="module"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div aria-hidden="true" class="color-strip"><i></i><i></i><i></i><i></i><i></i></div>
+<header class="site-header">
+<a aria-label="Field Notes, back to top" class="wordmark" href="#top"><span aria-hidden="true" class="brand-symbol">✳</span> FIELD NOTES <span class="brand-divider">/</span><span class="brand-sub">CYBERSECURITY</span></a>
+
+</header>
+<main id="main">
+<section aria-labelledby="hero-title" class="hero page-width" id="top">
+<div class="hero-copy">
+
+<h1 id="hero-title">Weak<br/><em>Authentication.</em></h1>
+<p class="hero-question">How easy is it to pretend to be you?</p>
+
+<div class="hero-links"><a class="button dark" href="#identity">Let’s find out <span aria-hidden="true">↓</span></a></div>
+</div>
+<div aria-label="Animation: a password moves through a login check and opens the gate." class="hero-art">
+<div aria-hidden="true" class="art-grid"></div>
+
+<svg aria-hidden="true" class="gate-drawing" viewbox="0 0 380 310">
+<defs><marker id="hero-arrow" markerheight="5" markerwidth="5" orient="auto" refx="8" refy="5" viewbox="0 0 10 10"><path d="M0 0L10 5L0 10" fill="none" stroke="currentColor" stroke-width="1.5"></path></marker></defs>
+<path class="art-wire" d="M50 173H163M236 173H329" marker-end="url(#hero-arrow)"></path>
+<rect class="gate-outer" height="198" rx="48" width="97" x="150" y="53"></rect>
+<rect class="gate-inner" height="168" rx="33" width="65" x="166" y="68"></rect>
+<path class="lock-shackle" d="M194 123v-10a13 13 0 0 1 26 0v10"></path>
+<rect class="lock-body" height="31" rx="6" width="34" x="185" y="122"></rect>
+<circle cx="202" cy="136" fill="currentColor" r="2.5"></circle><path d="M202 138v5" stroke="currentColor" stroke-width="2"></path>
+<circle class="person-bg" cx="64" cy="173" r="30"></circle>
+<circle class="person-line" cx="64" cy="165" r="7"></circle><path class="person-line" d="M51 185c0-15 26-15 26 0"></path>
+<rect class="success-bg" height="43" rx="12" width="43" x="294" y="152"></rect>
+<path class="check-line" d="m306 174 7 7 13-17"></path>
+<path class="annotation-line" d="M269 79q47 2 48 39" marker-end="url(#hero-arrow)"></path>
+<path class="annotation-line" d="M89 220q26 30 66 32"></path>
+<text class="art-svg-label" text-anchor="middle" x="200" y="275">the identity gate</text>
+<circle class="hero-packet" cx="64" cy="173" r="5"></circle></svg>
+<div class="password-note"><span class="note-dot"></span><span class="mono">password: ••••••</span><span class="pill green">MATCH</span></div>
+<span class="art-scribble">Right password.<br/>Wrong person?</span>
+
+<button aria-label="Replay login animation" class="hero-replay" id="hero-replay" title="Replay login animation" type="button">↺</button></div>
+
+</section>
+<nav aria-label="Chapters" class="chapter-nav"><div class="chapter-inner">
+<a class="active" href="#identity"><span>01</span> The check</a><a href="#weaknesses"><span>02</span> Weak spots</a><a href="#attacks"><span>03</span> Attacks</a><a href="#risks"><span>04</span> Risks</a><a href="#defenses"><span>05</span> Defenses</a><a href="#takeaways"><span>06</span> Takeaways</a>
+<button class="reset-all" id="reset-all" title="Reset all simulations and the quiz" type="button"><span aria-hidden="true">↺</span> Reset demos</button>
+</div><div aria-hidden="true" class="reading-progress"><i id="reading-progress"></i></div></nav>
+<div class="article">
+<section aria-labelledby="identity-title" class="lesson-section" id="identity">
+<div class="section-meta"><span class="section-number orange">01</span></div>
+<h2 id="identity-title">First, prove it’s you.</h2>
+<p class="section-lede"><strong>Authentication</strong> checks who you are.<br/><strong>Weak authentication</strong> makes it easy for someone else to log in as you.</p>
+<div class="lab identity-lab">
+
+<div class="identity-body">
+<div class="device"><div aria-hidden="true" class="device-icon"><svg viewbox="0 0 56 56"><rect height="21" rx="5" width="40" x="8" y="24"></rect><path d="M16 24V10m24 14V10M15 37h2m6 0h2m6 0h10"></path></svg></div><div><span class="micro-label">FICTIONAL DEVICE</span><h3>Classroom router</h3><p>Default login: admin / admin.</p></div></div>
+<div class="login-demo"><div class="credential-row"><span>Username</span><code>admin</code></div><div class="credential-row"><span>Password</span><code>admin</code></div><div class="login-actions"><button class="button dark" id="default-login" type="button">Try login →</button><button aria-label="Reset default login" class="text-button" id="default-reset" type="button">↺</button></div><label class="toggle-label"><input id="change-defaults" type="checkbox"/><span aria-hidden="true" class="switch"></span> Change default password</label></div>
+</div>
+<div class="lab-feedback" id="default-feedback" role="status"><span class="feedback-symbol">?</span><p>You know the factory login. Does that make you the owner?</p></div>
+</div>
+
+</section>
+<section aria-labelledby="weakness-title" class="lesson-section" id="weaknesses">
+<div class="section-meta"><span class="section-number sky">02</span></div>
+<h2 id="weakness-title">Four weak spots.</h2>
+
+<div class="weakness-grid">
+<article class="weakness-card"><div class="card-top"><span aria-hidden="true" class="mini-icon orange-ink">***</span></div><h3>Weak or reused passwords</h3><p><code>123456</code>, a pet’s name, or the same password on every site.</p></article>
+<article class="weakness-card"><div class="card-top"><span aria-hidden="true" class="mini-icon blue-ink">⌘</span></div><h3>Default credentials</h3><p>A shared factory login, like <code>admin / admin</code>, left unchanged.</p></article>
+<article class="weakness-card"><div class="card-top"><span aria-hidden="true" class="mini-icon green-ink">1×</span></div><h3>No second factor</h3><p>In a password-only account, a stolen password may be all an attacker needs.</p></article>
+<article class="weakness-card"><div class="card-top"><span aria-hidden="true" class="mini-icon rose-ink">∞</span></div><h3>Unlimited attempts</h3><p>No rate limiting or temporary lockout to slow repeated login guesses.</p></article>
+</div>
+</section>
+<section aria-labelledby="attacks-title" class="lesson-section" id="attacks">
+<div class="section-meta"><span class="section-number green">03</span></div>
+<h2 id="attacks-title">Four attack patterns.</h2>
+
+<div class="lab attack-lab">
+
+<div aria-label="Attack pattern" class="lab-tabs" role="tablist"><button aria-controls="attack-panel" aria-selected="true" data-attack="brute" id="attack-tab-brute" role="tab" type="button">Brute force</button><button aria-controls="attack-panel" aria-selected="false" data-attack="dictionary" id="attack-tab-dictionary" role="tab" tabindex="-1" type="button">Dictionary</button><button aria-controls="attack-panel" aria-selected="false" data-attack="stuffing" id="attack-tab-stuffing" role="tab" tabindex="-1" type="button">Credential stuffing</button><button aria-controls="attack-panel" aria-selected="false" data-attack="spraying" id="attack-tab-spraying" role="tab" tabindex="-1" type="button">Password spraying</button></div>
+<div aria-labelledby="attack-tab-brute" id="attack-panel" role="tabpanel" tabindex="0">
+
+<div class="attack-stage"><div class="candidate-column"><div class="stage-label"><span id="candidate-label">CANDIDATE PINs</span></div><div class="candidate-list" id="candidate-list"></div></div><div aria-hidden="true" class="transit-column"><div class="flow-line"><span id="flow-dot"></span><span class="flow-arrow">→</span></div><span class="flow-label">TRY LOGIN</span></div><div class="accounts-column"><div class="stage-label"><span id="account-label">TARGET ACCOUNT</span></div><div class="account-list" id="account-list"></div></div></div>
+
+<div class="controls"><div class="step-controls"><button aria-label="Reset attack simulation" class="control-button" id="attack-reset" type="button">↺</button><button aria-label="Previous attack step" class="control-button" id="attack-prev" type="button">←</button><button class="button dark compact" id="attack-next" type="button">Next step <span aria-hidden="true">→</span></button><button class="button subtle compact" id="attack-play" type="button">▶ Play</button></div><span class="step-count" id="attack-step">STEP 0 / 5</span></div>
+
+</div>
+</div>
+
+<div class="comparison-note"><div><span class="comparison-term">Credential stuffing</span><p><strong>Stolen login pairs</strong><span>Try them on another site.</span></p></div><span aria-hidden="true" class="comparison-vs">≠</span><div><span class="comparison-term">Password spraying</span><p><strong>One common password</strong><span>Try it on many accounts.</span></p></div></div>
+</section>
+
+<section aria-labelledby="risks-title" class="lesson-section" id="risks">
+<div class="section-meta"><span class="section-number rose">04</span></div>
+<h2 id="risks-title">What can an attacker do?</h2>
+
+<div class="risk-chain"><div class="risk-origin"><span aria-hidden="true" class="risk-icon"><svg viewbox="0 0 32 32"><circle cx="16" cy="10" r="5"></circle><path d="M6 28v-4a10 10 0 0 1 20 0v4M4 4l24 24"></path></svg></span><strong>Account compromised</strong></div><span aria-hidden="true" class="risk-arrow">→</span><div class="risk-outcomes"><div><span class="risk-number">01</span><p><strong>Unauthorized access</strong></p></div><div><span class="risk-number">02</span><p><strong>Stolen data</strong></p></div><div><span class="risk-number">03</span><p><strong>Money loss &amp; data breaches</strong></p></div></div>
+
+</div></section>
+<section aria-labelledby="defenses-title" class="lesson-section" id="defenses">
+<div class="section-meta"><span class="section-number blue">05</span></div>
+<h2 id="defenses-title">Make the login stronger.</h2>
+
+<div class="lab defense-lab">
+
+<div aria-label="Defense scenario" class="lab-tabs" role="tablist"><button aria-controls="defense-panel" aria-selected="true" data-defense="rate" id="defense-tab-rate" role="tab" type="button">01 · Rate limiting</button><button aria-controls="defense-panel" aria-selected="false" data-defense="unique" id="defense-tab-unique" role="tab" tabindex="-1" type="button">02 · Unique passwords</button><button aria-controls="defense-panel" aria-selected="false" data-defense="mfa" id="defense-tab-mfa" role="tab" tabindex="-1" type="button">03 · Add MFA</button></div>
+<div aria-labelledby="defense-tab-rate" id="defense-panel" role="tabpanel" tabindex="0">
+<div class="experiment-intro"><div><h3 id="defense-name"></h3></div></div>
+<div class="evidence" id="defense-evidence"><span class="micro-label" id="defense-evidence-label">SAME INPUT</span><span class="mono" id="defense-input"></span></div>
+<div class="defense-comparison"><div class="check-panel before"><div class="check-heading"><span class="panel-marker">A</span><span id="before-title">Without rate limiting</span><span class="micro-label">BEFORE</span></div><div class="panel-credential" id="before-credential"></div><div class="check-visual" id="before-visual"></div><span class="outcome neutral" id="before-status">READY</span><span class="panel-event" id="before-event"></span></div><div class="check-panel after"><div class="check-heading"><span class="panel-marker">B</span><span id="after-title">With rate limiting</span><span class="micro-label">AFTER</span></div><div class="panel-credential" id="after-credential"></div><div class="check-visual" id="after-visual"></div><span class="outcome neutral" id="after-status">READY</span><span class="panel-event" id="after-event"></span></div></div>
+
+<div class="controls"><div class="step-controls"><button aria-label="Reset defense simulation" class="control-button" id="defense-reset" type="button">↺</button><button aria-label="Previous defense step" class="control-button" id="defense-prev" type="button">←</button><button class="button dark compact" id="defense-next" type="button">Next step <span aria-hidden="true">→</span></button><button class="button subtle compact" id="defense-play" type="button">▶ Play</button></div><span class="step-count" id="defense-step"></span></div>
+<div class="mfa-user-controls" hidden="" id="mfa-user-controls"><button class="text-button" id="mfa-legitimate" type="button">Try with both factors →</button></div>
+
+</div>
+</div>
+<div class="action-grid"><article><span aria-hidden="true" class="action-icon">aA</span><h3>Make it long. Make it unique.</h3></article><article><span aria-hidden="true" class="action-icon">↺</span><h3>Change the defaults.</h3></article><article><span aria-hidden="true" class="action-icon">◎</span><h3>Build better habits.</h3></article></div>
+<details class="detail-note"><summary>Two things to know <span aria-hidden="true">+</span></summary><div><p><strong>MFA needs different factor types:</strong> something you know, have, or are. A password + a PIN is still only “something you know.” MFA helps, but does not stop every attack.</p><p><strong>Rate limiting slows guesses.</strong> A short wait or temporary lockout can help. Long lockouts may also block the real user. Use more than one defense.</p></div></details>
+</section>
+<section aria-labelledby="takeaways-title" class="lesson-section" id="takeaways">
+<div class="section-meta"><span class="section-number orange">06</span></div>
+<h2 id="takeaways-title">Which attack is this?</h2>
+<div class="quiz-card"><div class="quiz-kicker"><span class="micro-label">ONE QUICK CHECK</span></div><h3>An attacker tries one common password across many accounts. What is this?</h3><div aria-label="Choose the attack pattern" class="quiz-options" role="group"><button data-answer="brute" type="button"><span>A</span>Brute force<span class="answer-mark"></span></button><button data-answer="dictionary" type="button"><span>B</span>Dictionary attack<span class="answer-mark"></span></button><button data-answer="stuffing" type="button"><span>C</span>Credential stuffing<span class="answer-mark"></span></button><button data-answer="spraying" type="button"><span>D</span>Password spraying<span class="answer-mark"></span></button></div><p class="quiz-feedback" id="quiz-feedback" role="status">Choose an answer.</p><button class="text-button" id="quiz-reset" type="button">↺ Try again</button></div>
+<div class="takeaway-box"><span class="eyebrow">THE SHORT VERSION</span><h3>Better proof.<br/><em>Fewer ways in.</em></h3><ol><li><span>01</span> Make passwords strong and unique.</li><li><span>02</span> Add independent identity checks.</li><li><span>03</span> Limit attempts. Improve security habits.</li></ol></div>
+<div class="qa-heading"><h3>Let’s talk.</h3><span class="micro-label">Q&amp;A · 06:30–08:00</span></div>
+
+<div class="qa-list"><details><summary>Why is a complex reused password still risky?<span aria-hidden="true">+</span></summary><p>If one site leaks your password, an attacker can try it on other sites. A hard-to-guess password still works if someone already knows it. Use a different password for every account.</p></details><details><summary>Does a password plus a PIN count as MFA?<span aria-hidden="true">+</span></summary><p>No. Both are things you know. MFA needs different factor types, such as a password and a code from a device you have. Two steps do not always mean two factors.</p></details><details><summary>If we have MFA, why do we still need other defenses?<span aria-hidden="true">+</span></summary><p>Each defense helps with a different problem. MFA adds a check, rate limiting slows guesses, and unique passwords stop one leaked password from working everywhere.</p></details></div>
+</section>
+
+</div>
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+<noscript><p class="noscript">Turn on JavaScript to use the demos.</p></noscript>
+</body>
+</html>
